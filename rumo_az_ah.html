@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumo para Azimute | Anti-horário</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,.2);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            margin-right: 10px;
+        }
+        input[type="number"] {
+            width: 80px;
+        }
+        .btn {
+            width: 100%;
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+        }
+        .btn:hover {
+            background-color: #5a32a3;
+            border-color: #5a32a3;
+        }
+        #output {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #6f42c1;
+        }
+        #sexagesimal-output {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #6f42c1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Conversor de Rumo para Azimute | Anti-horário</h1>
+        <form id="form">
+            <div class="form-group">
+                <label for="degrees">Graus:</label>
+                <input type="number" id="degrees" name="degrees" min="0" max="90" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="minutes">Minutos:</label>
+                <input type="number" id="minutes" name="minutes" min="0" max="59" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="seconds">Segundos:</label>
+                <input type="number" id="seconds" name="seconds" min="0" max="59" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="quadrant">Quadrante:</label>
+                <select id="quadrant" name="quadrant" class="form-control">
+                    <option value="NE">NE - 1º Quadrante</option>
+                    <option value="SE">SE - 2º Quadrante</option>
+                    <option value="SW">SW - 3º Quadrante</option>
+                    <option value="NW">NW - 4º Quadrante</option>
+                </select>
+            </div>
+            <input type="submit" value="Converter" class="btn btn-primary btn-block">
+        </form>
+        <p id="output"></p>
+        <p id="sexagesimal-output"></p>
+    </div>
+
+    <script src="<URL>"></script>
+    <script src="<URL>"></script>
+    <script>
+        function convertToAzimute(degrees, minutes, seconds, quadrant) {
+            let totalDegrees = degrees + (minutes / 60) + (seconds / 3600);
+            let azimute;
+            if (quadrant === "NE") {
+                azimute = 90 - totalDegrees ;
+            } else if (quadrant === "SE") {
+                azimute =  180 - totalDegrees;
+            } else if (quadrant === "SW") {
+                azimute = 270 - totalDegrees;
+            } else {
+                azimute = 360 - totalDegrees;
+            }
+            return azimute;
+        }
+
+        function convertToSexagesimal(degrees) {
+            let d = Math.floor(degrees);
+            let minfloat = (degrees - d) * 60;
+            let m = Math.floor(minfloat);
+            let secfloat = (minfloat - m) * 60;
+            let s = Math.round(secfloat);
+            return `${d}°${m}'${s}"`;
+        }
+
+        document.getElementById("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let degrees = parseInt(document.getElementById("degrees").value);
+            let minutes = parseInt(document.getElementById("minutes").value);
+            let seconds = parseInt(document.getElementById("seconds").value);
+            let quadrant = document.getElementById("quadrant").value;
+            let azimute = convertToAzimute(degrees, minutes, seconds, quadrant);
+            document.getElementById("output").textContent = "Azimute: " + azimute + "°";
+            let sexagesimal = convertToSexagesimal(azimute);
+            document.getElementById("sexagesimal-output").textContent = "Azimute Sexagesimal: " + sexagesimal;
+        });
+    </script>
+</body>
+
+
+</html>

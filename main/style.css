@@ -1,0 +1,14 @@
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  .navbar-nav .nav-link {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  .navbar-nav .active > .nav-link {
+    color: #007bff;
+  }

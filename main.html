@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Conversor de Graus</title>
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #008CBA;
+        border: none;
+        color: #fff;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #006E89;
+      }
+      #resultado {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Conversor de Graus</h1>
+    
+    <div class="input-group">
+      <label for="decimal">Graus Decimais:</label>
+      <input type="number" id="decimal" placeholder="Digite os graus decimais...">
+    </div>
+    
+    <div class="input-group">
+      <label for="graus">Graus:</label>
+      <input type="number" id="graus" placeholder="Digite os graus...">
+    </div>
+    
+    <button onclick="converterParaSexagesimal()">Converter para Graus Sexagesimais</button>
+    <button onclick="converterParaDecimal()">Converter para Graus Decimais</button>
+    
+    <div id="resultado"></div>
+    
+    <script>
+      function converterParaSexagesimal() {
+        var decimal = document.getElementById("decimal").value;
+        
+        var graus = Math.floor(decimal);
+        var minutosDecimais = (decimal - graus) * 60;
+        var minutos = Math.floor(minutosDecimais);
+        var segundos = (minutosDecimais - minutos) * 60;
+        
+        var resultado = graus + "° " + minutos + "' " + segundos.toFixed(2) + "\"";
+        
+        document.getElementById("resultado").innerHTML = resultado;
+      }
+      
+      function converterParaDecimal() {
+        var graus = document.getElementById("graus").value;
+        
+        var decimal = parseFloat(graus);
+        
+        document.getElementById("resultado").innerHTML = decimal.toFixed(6);
+      }
+    </script>
+  </body>
+</html>

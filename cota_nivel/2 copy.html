@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabela de Levantamento</title>
+	<meta charset="utf-8">
+	<style>
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			padding: 5px;
+			text-align: center;
+		}
+		th {
+			background-color: #ddd;
+		}
+	</style>
+</head>
+<body>
+	<h1>Tabela de Levantamento</h1>
+	<div>
+		<label for="pontos">Quantos pontos? </label>
+		<input type="number" id="pontos" min="1">
+		<br>
+		<label for="visadas_mudanca">Quais pontos são Visadas de Mudança? (separados por vírgula)</label>
+		<input type="text" id="visadas_mudanca">
+		<br>
+		<button onclick="gerarTabela()">Gerar Tabela</button>
+	</div>
+	<br>
+	<table id="tabela_levantamento">
+	</table>
+	<script>
+		function gerarTabela() {
+			const numEstacas = document.getElementById("pontos")
+			const tabela = document.getElementById("tabela_levantamento");
+
+			// Limpar tabela
+			tabela.innerHTML = "";
+
+			// Criar cabeçalho
+			const cabecalho = tabela.insertRow();
+			const estaca = cabecalho.insertCell();
+			estaca.innerText = "Estaca";
+			const vante = cabecalho.insertCell();
+			vante.innerText = "Visada Vante (m)";
+			const re = cabecalho.insertCell();
+			re.innerText = "Visada Ré (m)";
+			const pd = cabecalho.insertCell();
+			pd.innerText = "Pé Direito (m)";
+
+			// Criar linhas
+			let pdAtual = 0;
+			for (let i = 1; i <= numEstacas; i++) {
+				const linha = tabela.insertRow();
+				const estacaCelula = linha.insertCell();
+				estacaCelula.innerText = i;
+				const vanteCelula = linha.insertCell();
+				const reCelula = linha.insertCell();
+				const pdCelula = linha.insertCell();
+				if (i === 1) {
+				const reInput = document.createElement("input");
+				reInput.type = "number";
+				reInput.min = 0;
+				reInput.max = 9999;
+				reInput.required = true;
+				reCelula.appendChild(reInput);
+				} else if (i === numEstacas) {
+				vanteCelula.innerText = "-";
+				reCelula.innerText = "-";
+				pdCelula.innerText = "-";
+				} else {
+				const vanteInput = document.createElement("input");
+				vanteInput.type = "number";
+				vanteInput.min = 0;
+				vanteInput.max = 9999;
+				vanteInput.required = true;
+				vanteCelula.appendChild(vanteInput);
+
+				let isVisadaMudanca = false;
+				if (i > 1) {
+					const reInput = document.createElement("input");
+					reInput.type = "number";
+					reInput.min = 0;
+					reInput.max = 9999;
+					reInput.required = true;
+					if (vanteCelula.innerText !== "-") {
+					pdAtual = parseFloat(pdAtual) + parseFloat(vanteCelula.innerText);
+					isVisadaMudanca = true;
+					}
+					reCelula.appendChild(reInput);
+				}
+
+				if (!isVisadaMudanca) {
+					pdAtual = parseFloat(pdAtual) + parseFloat(vanteInput.value);
+				}
+
+				pdCelula.innerText = pdAtual.toFixed(2);
+				}
+			}
+			}
+
+			let calcularBtn = document.createElement('button');
+            calcularBtn.textContent = 'Calcular';
+			calcularBtn.onclick = calcular;
+			tabela.parentElement.appendChild(calcularBtn);
+
+function calcular() {
+  let alturas_instrumento = [];
+  let cotas_terreno = [];
+
+  for (let i = 0; i < pontos; i++) {
+    let visada_re = document.getElementById(`visada_re_${i}`).value;
+    let visada_vante_intermediaria = document.getElementById(`visada_vante_intermediaria_${i}`).value;
+    let visada_vante_mudanca = visadas_mudanca.includes(i + 1) ? document.getElementById(`visada_vante_mudanca_${i}`).value : null;
+
+    visada_re = visada_re ? visada_re : visada_vante_intermediaria;
+    let altura_instrumento = i === 0 ? parseFloat(document.getElementById(`altura_instrumento_${i}`).value) : alturas_instrumento[i - 1];
+    let visada_vante = visada_vante_mudanca ? visada_vante_mudanca : visada_re;
+
+    let altura_ponto = altura_instrumento + parseFloat(visada_re);
+    let cota_terreno = i === 0 ? parseFloat(document.getElementById(`cota_terreno_${i}`).value) : cotas_terreno[i - 1];
+    cota_terreno += parseFloat(visada_vante);
+
+    if (visada_vante_mudanca) {
+      alturas_instrumento.push(parseFloat(visada_re));
+      cotas_terreno.push(cota_terreno);
+    } else {
+      alturas_instrumento.push(altura_instrumento);
+      cotas_terreno.push(cota_terreno);
+    }
+
+    document.getElementById(`altura_instrumento_${i}`).textContent = altura_ponto.toFixed(3);
+    document.getElementById(`cota_terreno_${i}`).textContent = cota_terreno.toFixed(3);
+  }
+
+  let cota_inicial = parseFloat(document.getElementById(`cota_terreno_0`).value);
+  let somatorio_visadas_re = 0;
+  let somatorio_visadas_mudanca = 0;
+
+  for (let i = 0; i < pontos; i++) {
+    let visada_re = parseFloat(document.getElementById(`visada_re_${i}`).value);
+    let visada_vante_mudanca = visadas_mudanca.includes(i + 1) ? parseFloat(document.getElementById(`visada_vante_mudanca_${i}`).value) : 0;
+
+    somatorio_visadas_re += visada_re;
+    somatorio_visadas_mudanca += visada_vante_mudanca;
+  }
+
+  let cota_final = cota_inicial + somatorio_visadas_re - somatorio_visadas_mudanca;
+
+  alert(`A cota final é ${cota_final.toFixed(3)}`);
+}
+
+</script>
+</body>

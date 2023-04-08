@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Graus Decimais para Graus Sexagesimais</title>
+    
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        margin-right: 10px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #6f42c1;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #6f42c1;
+    }
+
+    #resultado {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+		<h1>Conversor de Graus Decimais para Graus Sexagesimais</h1>
+		<p>Digite o valor em graus decimais:</p>
+		<input type="text" id="input-gd" placeholder="Digite aqui">
+		<button id="converter" onclick="converterGD()">Converter</button>
+		<div id="resultado"></div>
+	</div>
+
+
+    <script>
+        function converterGD() {
+        var inputGD = document.getElementById("input-gd").value;
+        var graus = Math.floor(inputGD);
+        var minutos = Math.floor((inputGD - graus) * 60);
+        var segundos = Math.round(((inputGD - graus - (minutos / 60)) * 3600) * 100) / 100;
+
+        document.getElementById("resultado").innerHTML = "Resultado: " + graus + "° " + minutos + "' " + segundos + "''";
+        }
+    </script>
+</body>
+</html>
