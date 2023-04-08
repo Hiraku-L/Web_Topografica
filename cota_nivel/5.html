@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabela de Estacas</title>
+	<script>
+		function gerarTabela() {
+			var qtdPontos = parseInt(prompt("Quantos pontos?"));
+			var visadasMudanca = prompt("Quais pontos são visadas de mudança? (separe por vírgula)").split(",").map(function(x){return parseInt(x)});
+			var alturaInstrumento = parseFloat(prompt("Digite a altura do instrumento do primeiro ponto:"));
+			var cotaTerreno = parseFloat(prompt("Digite a cota do terreno do primeiro ponto:"));
+			var somatorioVisadasRe = 0;
+			var somatorioVisadasMudanca = 0;
+
+			// Criando a tabela
+			var tabela = document.createElement("table");
+			var cabecalho = tabela.createTHead();
+			var linhaCabecalho = cabecalho.insertRow();
+			var estacasCabecalho = linhaCabecalho.insertCell();
+			var visadasCabecalho = linhaCabecalho.insertCell();
+			var alturaCabecalho = linhaCabecalho.insertCell();
+			var visadaMudancaCabecalho = linhaCabecalho.insertCell();
+			var cotaCabecalho = linhaCabecalho.insertCell();
+
+			estacasCabecalho.innerHTML = "Estacas";
+			visadasCabecalho.innerHTML = "Visada Ré e/ou Vante Intermediária";
+			alturaCabecalho.innerHTML = "Altura do Instrumento";
+			visadaMudancaCabecalho.innerHTML = "Visada Vante de Mudança";
+			cotaCabecalho.innerHTML = "Cota do Terreno";
+
+			var corpo = tabela.createTBody();
+
+			// Preenchendo a tabela
+			for (var i = 1; i <= qtdPontos; i++) {
+				var linha = corpo.insertRow();
+				var estaca = linha.insertCell();
+				var visadas = linha.insertCell();
+				var altura = linha.insertCell();
+				var visadaMudanca = linha.insertCell();
+				var cota = linha.insertCell();
+
+				estaca.innerHTML = i;
+
+				if (visadasMudanca.includes(i)) {
+					var visadaMudancaValor = parseFloat(prompt("Digite a visada vante de mudança para a estaca " + i + ":"));
+					somatorioVisadasMudanca += visadaMudancaValor;
+					alturaInstrumento = cotaTerreno + visadaMudancaValor;
+				}
+
+				var visadasValor = prompt("Digite as visadas ré e/ou vante intermediária para a estaca " + i + ":");
+				var visadasRe = 0;
+				var visadasVanteIntermediaria = 0;
+
+				if (visadasValor.includes("-")) {
+					visadasRe = parseFloat(visadasValor.split("-")[0]);
+					visadasVanteIntermediaria = parseFloat(visadasValor.split("-")[1]);
+				} else {
+					visadasVanteIntermediaria = parseFloat(visadasValor);
+				}
+
+				somatorioVisadasRe += visadasRe;
+
+				if (visadasMudanca.includes(i)) {
+					cotaTerreno = alturaInstrumento - visadaMudancaValor;
+				} else {
+					cotaTerreno = alturaInstrumento + visadasRe;
+				}
+
+				altura.innerHTML = alturaInstrumento.toFixed(2);
+				visadas.innerHTML = visadasRe + "-" + visadasVanteIntermediaria;
+				visadaMudanca.innerHTML = visadasMudanca.includes(i) ? visadaMudancaValor.toFixed(2) : "-";
+				cota.innerHTML = cotaTerreno.toFixed(2);
+			}
+
+			// Calculando e exibindo o somatório das visadas ré e das visadas de mudança
+			var somatorioVisadasReText = "Somatório das visadas ré: " + somatorioVisadasRe.toFixed(2);
+			var somatorioVisadasMudancaText = "Somatório das visadas de mudança: " + somatorioVisadasMudanca.toFixed(2);
+			var resultado = document.createElement("p");
+			resultado.innerHTML = somatorioVisadasReText + "<br>" + somatorioVisadasMudancaText;
+			document.body.appendChild(resultado);
+
+			// Verificando se o cálculo foi feito corretamente
+			var cotaFinal = cotaTerreno;
+			var cotaInicial = alturaInstrumento - visadasMudanca[0];
+			var somatorioVisadas = somatorioVisadasRe - somatorioVisadasMudanca;
+			if (cotaFinal.toFixed(2) == (cotaInicial + somatorioVisadas).toFixed(2)) {
+            var validacao = document.createElement("p");
+            validacao.innerHTML = "Cálculo realizado corretamente!";
+            document.body.appendChild(validacao);
+            } else {
+            var validacao = document.createElement("p");
+            validacao.innerHTML = "Erro no cálculo!";
+            document.body.appendChild(validacao);
+            }
+
+                    // Adicionando a tabela ao documento
+                    document.body.appendChild(tabela);
+                }
+</script>
+</head> 
+<body> 
+<button onclick="gerarTabela()">Gerar Tabela</button> 
+</body> 
+</html>
