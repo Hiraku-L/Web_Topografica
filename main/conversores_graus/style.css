@@ -17,6 +17,14 @@ body {
     text-align: center;
     margin-bottom: 50px;
   }
+  .col-sm-5 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .col-sm-4 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
 
   .a {
     display: block;
@@ -28,6 +36,6 @@ body {
   }
 
   .a:hover {
-    background-color: #6f42c1;
+    background-color: #421152;
   }
   
