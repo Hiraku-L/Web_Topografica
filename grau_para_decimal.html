@@ -88,7 +88,11 @@ button:hover {
           <label>Segundos:</label>
           <input type="number" id="segundos" placeholder="0" min="0" max="60"> <br>
           <button type="button" onclick="converterGraus()">Converter</button>
-        </form>
+          <div id="formulas">
+          <p>Fórmula: <br>
+        <p>Graus decimais = graus + (minutos / 60) + (segundos / 3600)</p>
+          </div>
+      </form>
         <p id="resultado"></p>
       </div>
       <script>

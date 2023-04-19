@@ -158,10 +158,13 @@
         } else {
           resultado = (angulo1 + angulo2) % 360;
           if (resultado < 0) {
-            resultado += 360;
+            resultado = resultado + 360;
+          }
+          else{
+            resultado = resultado-360;
           }
         }
-  
+        
         document.getElementById("resultado").innerHTML = "Resultado: " + converterSexagesimal(resultado);
       }
     </script>

@@ -24,6 +24,10 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
         .form-group {
             display: flex;
             justify-content: center;
@@ -59,6 +63,33 @@
             font-weight: bold;
             color: #6f42c1;
         }
+        table {
+			border-collapse: collapse;
+			width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+		table {
+			border-collapse: collapse;
+			width: 100%;
+            box-shadow: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+		}
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border: 1px solid black;
+		}
+		th {
+            color: white;
+			background-color: #6f42c1;
+		}
+		tr:nth-child(even) {
+            color: white;
+			background-color: #6f42c1;
+		}
+        
     </style>
 </head>
 <body>
@@ -90,10 +121,37 @@
         </form>
         <p id="output"></p>
         <p id="sexagesimal-output"></p>
+        <h2>Fórmula genérica</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Quadrante</th>
+                    <th>Fórmula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ne</td>
+                    <td>Rumo = Azimute</td>
+                </tr>
+                <tr>
+                    <td>Se</td>
+                    <td>Rumo = 180°-Azimute</td>
+                </tr>
+                <tr>
+                    <td>Sw</td>
+                    <td>Rumo = Azimute - 180°</td>
+                </tr>
+                <tr>
+                    <td>Nw</td>
+                    <td>Rumo = 360°-Azimute</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <script src="<URL>"></script>
-    <script src="<URL>"></script>
+    
     <script>
         function convertToAzimute(degrees, minutes, seconds, quadrant) {
             let totalDegrees = degrees + (minutes / 60) + (seconds / 3600);
