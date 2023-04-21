@@ -125,6 +125,10 @@ input[type="number"] {
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
+        #inputs {
+          text-align: center !important;
+          margin-right: none;
+        }
     }
     @media only screen and (max-width: 540px) and (min-width: 460px){
       section {
@@ -136,4 +140,24 @@ input[type="number"] {
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
+        #inputs {
+          text-align: center !important;
+          margin-right: none;
+        }
+        @media only screen and (max-width: 1025px) and (min-width: 540px){
+          section {
+            width: 80%;
+            margin: 0 auto 20px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+            #inputs {
+              text-align: center !important;
+              margin-right: none;
+            }
+          }
+          
     }

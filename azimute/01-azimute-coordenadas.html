@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azimute | Coordenadas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.min.js"></script>
+    <script src=''></script>
+</head>
+<body>
+    <form id="form">
+    <h1>Azimute a partir de Coordenadas</h1>
+    <section>
+        <input type="number" id="coordx1" class="coord" placeholder="Coordenada X1" step="0.001" required> <br>
+        <input type="number" id="coordx2" class="coord" placeholder="Coordenada X2" step="0.001" required> <br>
+        <input type="number" id="coordy1" class="coord" placeholder="Coordenada Y1" step="0.001" required> <br>
+        <input type="number" id="coordy2" class="coord" placeholder="Coordenada Y2" step="0.001" required>
+        <div id="resultado"></div>
+    </section>
+    <input type="submit" onsubmit="submit()" value="Calcular" id="btn">
+    </form>
+
+    <script>
+        function converterSexagesimal(valor) {
+            let graus = Math.floor(valor);
+            let minutos = Math.floor((valor - graus) * 60);
+            let segundos = Math.floor(((((valor - graus) * 60) - minutos) * 60));
+            return `${graus}° ${minutos}' ${segundos}"`;
+        }
+        function calcArctan(x) {
+            let result = math.atan(x);
+            return result;
+        }
+            
+            
+        
+        document.getElementById("form").addEventListener("submit", function(event) {
+            event.preventDefault()
+            let x1 =  parseFloat(document.getElementById("coordx1").value)
+            let x2 =  parseFloat(document.getElementById("coordx2").value)
+            let y1 =  parseFloat(document.getElementById("coordy1").value)
+            let y2 =  parseFloat(document.getElementById("coordy2").value)
+            let dx = x2-x1
+            let dy = y2-y1
+            let delta = dx/dy
+            console.log(delta)
+            const resultado = x.atan()
+            resultado = resultado*180/Math.PI
+            document.getElementById("resultado").innerHTML = "Resultado: " + converterSexagesimal(resultado);
+        });
+
+    </script>
+
+</body>
+</html>

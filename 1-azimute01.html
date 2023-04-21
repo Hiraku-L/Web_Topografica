@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo de Azimute</title>
+    <title>Azimute Consecutivo</title>
 	<link rel="stylesheet" href="azimute01/style.css">
 </head>
 <body>
-	<h1>Cálculo de Azimute</h1>
+	<h1>Azimute Consecutivo</h1>
 	<section>
 		<h2>Azimute</h2>
 		<div id="inputs">
@@ -33,6 +33,12 @@
 	</section>
 	<button onclick="calcular()" id="btn" class="btn" >Calcular</button>
 	<div id="resultado"></div>
+	<section>
+		<h2>Fórmula Genérica</h2>
+		<p>𝐴𝑧𝑖,𝑖+1 = 𝐴𝑧𝑖−1,𝑖 + 𝛼𝑖 − 180°</p>
+		<p>Para resultados menores que 0, some 360.</p>
+      	<p>Para resultados maiores que 0, subtraia 360</p>
+	</section>
 	<script src="azimute01/script.js"></script>
 </body>
 </html>
