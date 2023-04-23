@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Azimute | Coordenadas</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.min.js"></script>
-    <script src=''></script>
+    <script src='big.js-master/big.js'></script>
+    <script src="big.js-master/big.mjs"></script>
 </head>
 <body>
     <form id="form">
@@ -45,9 +46,9 @@
             let dy = y2-y1
             let delta = dx/dy
             console.log(delta)
-            const resultado = x.atan()
-            resultado = resultado*180/Math.PI
-            document.getElementById("resultado").innerHTML = "Resultado: " + converterSexagesimal(resultado);
+            const resultado = delta.atan()
+            resultado1 = resultado*180/Math.PI
+            document.getElementById("resultado").innerHTML = "Resultado: " + converterSexagesimal(resultado1);
         });
 
     </script>
