@@ -46,8 +46,20 @@
             let dy = y2-y1
             let delta = dx/dy
             console.log(delta)
-            const resultado = delta.atan()
+            const resultado = Math.atan(delta)
             resultado1 = resultado*180/Math.PI
+            if (dx>=0 && dy>=0){
+                resultado1 = resultado1
+            }
+            else if (dx>=0 && dy<0){
+                resultado1 = 180-resultado1
+            }
+            else if (dx<0 && dy<0){
+                resultado1 = resultado1+180
+            }
+            else{
+                resultado1 = 360-resultado1
+            }
             document.getElementById("resultado").innerHTML = "Resultado: " + converterSexagesimal(resultado1);
         });
 
