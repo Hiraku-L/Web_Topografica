@@ -48,13 +48,14 @@
             console.log(delta)
             const resultado = Math.atan(delta)
             resultado1 = resultado*180/Math.PI
-            if (dx>=0 && dy>=0){
+            
+            if ((dx>0) && (dy>0)){
                 resultado1 = resultado1
             }
-            else if (dx>=0 && dy<0){
+            else if ((dx>0) && (dy<0)){
                 resultado1 = 180-resultado1
             }
-            else if (dx<0 && dy<0){
+            else if ((dx<0) && (dy<0)){
                 resultado1 = resultado1+180
             }
             else{
